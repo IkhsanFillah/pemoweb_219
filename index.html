@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu cok</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    /> <!-- CDN dari bootstrap -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> <!-- opsional -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> <!-- CDN dari jquery -->
+    <style> 
+      .table-responsive {
+        margin-top: 20px; 
+      } 
+      form {
+        margin-top: 20px;
+      }
+    </style> <!-- jangan dibuat terlebih dahulu sehabis membuat html, opsional -->
+  </head>
+  <body>
+    <div class="container"> <!-- container berfungsi agar lebih rapi dan responsif -->
+      <div class="table-responsive"> <!-- optional -->
+        <table class="table table-striped"> <!-- table berfungsi untuk membuat tabel dan table-striped berfungsi untuk membuat background tabel setiap baris ganjil dan genap berbeda warna -->
+          <thead> <!-- thead berfungsi untuk membuat table header -->
+            <tr> <!-- tr berfungsi untuk membuat table row (baris) -->
+              <th>No</th> <!-- th berfungsi untuk membuat table header -->
+              <th>nama</th> <!-- th berfungsi untuk membuat table header -->
+              <th>Harga</th> <!-- th berfungsi untuk membuat table header -->
+              <th></th> <!-- th berfungsi untuk membuat table header -->
+            </tr> <!-- tr berfungsi untuk membuat table row (baris) -->
+          </thead> <!-- thead berfungsi untuk membuat table header -->
+          <tbody id="menuTable"> <!-- tbody berfungsi untuk membuat table body -->
+            <tr> <!-- tr berfungsi untuk membuat table row (baris) -->
+              <td>1</td> <!-- td berfungsi untuk membuat table data (kolom) -->
+              <td>nasdsa</td> <!-- td berfungsi untuk membuat table data (kolom) -->
+              <td>21321312</td> <!-- td berfungsi untuk membuat table data (kolom) -->
+              <td><button class="btn btn-primary btn-sm">Edit</button></td> <!-- td berfungsi untuk membuat table data (kolom) -->
+              <td><button class="btn btn-danger btn-sm">Delete</button></td> <!-- td berfungsi untuk membuat table data (kolom) -->
+            </tr> <!-- tr berfungsi untuk membuat table row (baris) -->
+            <tr> <!-- tr berfungsi untuk membuat table row (baris) -->
+              <td>2</td> <!-- td berfungsi untuk membuat table data (kolom) -->
+              <td>Ayam</td> <!-- td berfungsi untuk membuat table data (kolom) -->
+              <td>23.000</td> <!-- td berfungsi untuk membuat table data (kolom) -->
+              <td><button class="btn btn-primary btn-sm">Edit</button></td>   <!-- td berfungsi untuk membuat table data (kolom) -->
+              <td><button class="btn btn-danger btn-sm">Delete</button></td>   <!-- td berfungsi untuk membuat table data (kolom) -->
+            </tr> <!-- tr berfungsi untuk membuat table row (baris) -->
+            <tr> <!-- tr berfungsi untuk membuat table row (baris) -->
+              <td>3</td>  <!-- td berfungsi untuk membuat table data (kolom) -->
+              <td>sadas</td> <!-- td berfungsi untuk membuat table data (kolom) -->
+              <td>123123</td> <!-- td berfungsi untuk membuat table data (kolom) -->
+              <td><button class="btn btn-primary btn-sm">Edit</button></td> <!-- td berfungsi untuk membuat table data (kolom) -->
+              <td><button class="btn btn-danger btn-sm">Delete</button></td> <!-- td berfungsi untuk membuat table data (kolom) -->
+            </tr> <!-- tr berfungsi untuk membuat table row (baris) -->
+          </tbody> <!-- tbody berfungsi untuk membuat table body -->
+        </table> <!-- table berfungsi untuk membuat tabel -->
+
+        <form id="addForm"> <!-- form berfungsi untuk membuat sebuah form untuk memasukan data menu tambahan -->
+          <div class="mb-3"> <!-- mb-3 berfungsi untuk membuat margin bottom 3 -->
+            <label for="nama" class="form-label">Nama</label> <!-- label berfungsi untuk membuat label dari input nama menu-->
+            <input type="text" class="form-control" id="nama" required /> <!-- input berfungsi untuk membuat input untuk mengisi nama menu -->
+            <small class="form-text text-muted">Nama produk (tidak boleh kosong)</small> <!-- small berfungsi untuk text secondary dalam form -->
+          </div>
+          <div class="mb-3"> <!-- mb-3 berfungsi untuk membuat margin bottom 3 -->
+            <label for="harga" class="form-label">Harga</label> <!-- label berfungsi untuk membuat label dari input harga menu -->
+            <input type="text" class="form-control" id="harga" required /> <!-- input berfungsi untuk membuat input untuk mengisi harga menu -->
+            <small class="form-text text-muted">Hanya angka tidak boleh mengandung alfabet</small> <!-- small berfungsi untuk text secondary dalam form -->
+          </div>
+          <button type="submit" class="btn btn-primary">Add</button> <!-- button submit berfungsi untuk menambahkan menu baru -->
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () { //fungsi ini adalah template dari jquery yang akan dijalankan ketika halaman telah selesai diload
+        let jmlKolom = $("#menuTable tr").length; //#menuTable tr.length ini adalah jumlah kolom dalam tabel menu yang akan ditambahkan ke variabel jmlKolom
+        $("#addForm").on("submit", function (e) { //memanggil id addForm pada form, ketika submit dijalankan akan menjalankan function (event) yang ada di dalamnya
+          e.preventDefault(); // event.preventDefault() berfungsi agar mencegarh event berjalan secara default
+          let nama = $("#nama").val(); //memanggil id nama pada form, kemudian ketika submit dijalankan, nama menu yang diinputkan akan ditampung pada variabel nama
+          let harga = $("#harga").val(); //memanggil id harga pada form, kemudian ketika submit dijalankan, harga menu yang diinputkan akan ditampung pada variabel harga
+
+          // Validasi nama
+          if (nama.length < 6) { // jika panjang nama kurang dari 6 karakter akan menampilkan alert
+            swal("Warning: Nama harus memiliki minimal 6 karakter!"); //menampilkan alert, swal bisa diganti dengan alert jika tidak menggunakan style alert
+            return; //jika validasi gagal, maka return akan menghentikan eksekusi function
+          }
+
+          // Validasi harga
+          if (isNaN(harga)) { //not a number jika inputan bukan angka (true) jika inputan angka (false)
+            swal("Warning: Harga harus berupa angka!"); //menampilkan alert, swal bisa diganti dengan alert jika tidak menggunakan style alert
+            return; //jika validasi gagal, maka return akan menghentikan eksekusi function
+          }
+
+          jmlKolom++; // menambahkan 1 ke variabel jmlKolom (jika ada 3 menu, maka jmlKolom = 4)
+
+          //memanggil id menuTable pada tabel, kemudian menambahkan baris baru dengan data sesuai yang telah diinputkan yang terpadat dalam variabel jmlKolom, nama, dan harga
+          $("#menuTable").append(`
+            <tr>
+              <td>${jmlKolom}</td>  
+              <td>${nama}</td>
+              <td>${harga}</td>
+              <td><button class="btn btn-primary btn-sm">Edit</button></td>
+              <td><button class="btn btn-danger btn-sm">Delete</button></td>
+            </tr>
+          `); // kurung tutup pada append 
+        }); // menghentikan function event
+      }); // menghentikan function jquery
+    </script>
+  </body>
+</html>
